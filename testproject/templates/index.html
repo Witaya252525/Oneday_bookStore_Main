@@ -1,0 +1,36 @@
+
+{% extends  'layout/base.html'%} 
+
+
+
+{%block content%} 
+<h1>Your register Page is</h1>
+<h1>The id is = {{id1}}</h1>
+<h1>{{email1}}</h1>
+<h1>{{name1}}</h1>
+
+{% if id1 == '001' and name1 == 'Witaya'%}
+<h2>Access Complete {{name1}}</h2>
+
+{%else%}
+
+<h2>Tay again</h2>
+
+{%endif%}
+
+<ul>
+    {% for a in activities%}
+    <li>{{a}}</li>
+    
+    {%endfor%}
+</ul>
+
+
+<a href = "{% url 'myapp:hello' id=1 %}">Go to Hellow_ID 1</a><br>
+<a href = "{% url 'myapp:witaya' %}">Go to This Home</a><br>
+<a href = "{% url 'myapp:article' year=2000  slug='witaya-chaison'%}">Go to Article with Slug</a><br>
+<a href = "{% url 'book:index' %}">Go to Book_Store</a><br>
+
+
+
+{% endblock %} 
