@@ -18,7 +18,7 @@
       {% for c in categories %}
       <a
         href="{% url 'book:index' %}?categoryid={{ c.id }}"
-        class="list-group-item list-group-item-action {% if categ_id|add:'0' == c.id %} active {% endif %}"
+        class="list-group-item list-group-item-action {% if categ_id == c.id %} active {% endif %}"
       >
         {{ c.name }}
       </a>
@@ -59,13 +59,9 @@
           </div>
           {% endfor %}
 
-          <!-- {% for a in b.author.all %}
-        <span class = "badge badge-secondarey ">{{a.name}}</span>
-        {% endfor %} -->
-
           <a
             href="{% url 'book:detail'  slug=b.slug %}"
-            class="btn btn-secondary mt-3"
+            class="btn btn-secondary mt-3 " 
           >
             More Detail</a
           >
@@ -74,7 +70,7 @@
 
       {% endfor %}
     </div>
-    
+
     <hr />
 
     <ul class="pagination justify-content-center mb-5">
