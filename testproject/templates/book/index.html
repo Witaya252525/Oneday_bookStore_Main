@@ -1,4 +1,6 @@
 {% extends 'layout/base.html'%} {% load static %}
+{% load humanize %} 
+
 
 <title>{%block title%} Book Page {%endblock%}</title>
 
@@ -51,7 +53,7 @@
             </h5>
           </div>
           <div>&nbsp&nbspCategory: {{b.category.name}}</div>
-          <!-- <div>&nbsp&nbspPrice: {{b.price|floatformat:2}}</div> -->
+          <!-- <div>&nbsp&nbspPrice: {{b.price|floatformat:2|intcomma}}</div> -->
           {% for a in b.author.all %}
           <div>
             &nbsp&nbspEngineer:

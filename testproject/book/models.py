@@ -73,6 +73,9 @@ class Book(models.Model):
     show_image.short_descripttion = 'Image'
 
 
+    def get_comment_count(self):
+        return self.bookcomment_set.count() 
+
 
 
 class BookComment(models.Model):
