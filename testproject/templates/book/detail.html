@@ -1,3 +1,6 @@
+
+
+{%load humanize %}  <!-- This loads the humanize template tag library for formatting numbers. -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -80,7 +83,7 @@
 
 
 
-      <h3 class="mt-5">Update</h3>
+      <h3 class="mt-5">Update : [ {{book.get_comment_count}} items ]</h3>
       <hr />
 
       <div>
