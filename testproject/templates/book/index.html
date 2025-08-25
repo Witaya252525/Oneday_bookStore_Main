@@ -1,10 +1,12 @@
-{% extends 'layout/base.html'%} {% load static %}
-{% load humanize %} 
-
+{% extends 'layout/base.html'%} {% load static %} {% load humanize %}
 
 <title>{%block title%} Book Page {%endblock%}</title>
 
 {%block content%}
+<a href="{% url 'book:book_add' %}" class="btn btn-success mb-3"
+  >Add New Book</a
+>
+<hr />
 
 <div class="row">
   <div class="col-lg-2">
@@ -16,8 +18,10 @@
       >
         ALL
       </a>
+
       <!-- Loop through categories and highlight the active one -->
       {% for c in categories %}
+
       <a
         href="{% url 'book:index' %}?categoryid={{ c.id }}"
         class="list-group-item list-group-item-action {% if categ_id == c.id %} active {% endif %}"
@@ -38,11 +42,7 @@
           {% if b.image %}
           <a href="{% url 'book:detail'  slug=b.slug %}">
             <div class="image-container">
-              <img
-                class="card-img-top img-fluid"
-                src="{{b.image.url}}"
-                alt=""
-              />
+              <img class="card-img-top" src="{{b.image.url}}" />
             </div>
           </a>
           {% endif %}
@@ -51,55 +51,58 @@
             <h5>
               <a href="{% url 'book:detail'  slug=b.slug %}">{{b.name}}</a>
             </h5>
-          </div>
-          <div>&nbsp&nbspCategory: {{b.category.name}}</div>
-          <!-- <div>&nbsp&nbspPrice: {{b.price|floatformat:2|intcomma}}</div> -->
-          {% for a in b.author.all %}
-          <div>
-            &nbsp&nbspEngineer:
-            <span class="badge badge-secondarey">{{a.name}}</span>
-          </div>
-          {% endfor %}
 
-          <a
-            href="{% url 'book:detail'  slug=b.slug %}"
-            class="btn btn-secondary mt-3 " 
-          >
-            More Detail</a
-          >
+            <div>Category: {{b.category.name}}</div>
+
+            {% for a in b.author.all %}
+            <div>
+              Engineer:
+              <span class="badge badge-secondarey">{{a.name}}</span>
+            </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-center mt-3">
+              <a
+                href="{% url 'book:detail'  slug=b.slug %}"
+                class="btn btn-primary"
+                style="width: 50%"
+              >
+                More Detail
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-
       {% endfor %}
+
+      <ul class="pagination justify-content-center mb-5">
+        <!-- Previous Page Link -->
+        {% if books.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ books.previous_page_number }}"
+            >Previous</a
+          >
+        </li>
+        {% endif %}
+
+        <!-- Page Numbers -->
+        {% for i in paginator.page_range %}
+        <li class="page-item {% if books.number == i %}active{% endif %}">
+          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endfor %}
+
+        <!-- Next Page Link -->
+        {% if books.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ books.next_page_number }}"
+            >Next</a
+          >
+        </li>
+        {% endif %}
+      </ul>
     </div>
 
-    <hr />
-
-    <ul class="pagination justify-content-center mb-5">
-      <!-- Previous Page Link -->
-      {% if books.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ books.previous_page_number }}"
-          >Previous</a
-        >
-      </li>
-      {% endif %}
-
-      <!-- Page Numbers -->
-      {% for i in paginator.page_range %}
-      <li class="page-item {% if books.number == i %}active{% endif %}">
-        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-      </li>
-      {% endfor %}
-
-      <!-- Next Page Link -->
-      {% if books.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ books.next_page_number }}">Next</a>
-      </li>
-      {% endif %}
-    </ul>
+    {%endblock%}
   </div>
-
-  {%endblock%}
 </div>
