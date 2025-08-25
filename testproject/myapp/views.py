@@ -5,19 +5,19 @@ from django.http import HttpResponse
 
 def hello(request,id):
     # greeting = "your ID : {000}".format(id)
-    greeting = f"your ID is == {id}"
+    greeting = (f"your ID : {id}")
     return HttpResponse(greeting)
 
 
 def article(request,year,slug):
     # greeting = "your ID : {000}".format(id)
 
-    return HttpResponse(f"<h1>Witaya Chaison {year} {slug}</h1>")
+    return HttpResponse(f"<h1> Seagate {year} {slug}</h1>")
 
 
 def index(request):
     id ='001'
-    name = 'Witaya'
+    name = 'Tawan Chaison'
     email ='witaya.chaison@gmail.com'
     
     activities = [ 'Football' , 'Running' ,'Badminton']
