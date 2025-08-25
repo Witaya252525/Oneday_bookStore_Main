@@ -3,6 +3,10 @@
 <title>{%block title%} Book Page {%endblock%}</title>
 
 {%block content%}
+<a href="{% url 'book:book_add' %}" class="btn btn-success mb-3"
+  >Add New Book</a
+>
+<hr />
 
 <div class="row">
   <div class="col-lg-2">

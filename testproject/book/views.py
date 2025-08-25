@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Category, Book, BookComment
+from .forms import BookForm
 
 
 def index(request):
@@ -39,3 +40,8 @@ def detail(request, slug):
     # Fetch comments using the related_name
     comments = book.bookcomment_set.all()
     return render(request, 'book/detail.html', {'book': book, 'comments': comments})
+
+
+def book_add(request):
+    form = BookForm()
+    return render(request, 'book/add.html', {'form': form})
